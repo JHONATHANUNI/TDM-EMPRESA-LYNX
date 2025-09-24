@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    <div class="chat-container">    
+    <div class="chat-container">
         <!-- Header -->
         <header class="chat-header">
             <div class="logo-and-hamburger">
@@ -25,13 +25,20 @@
             </div>
         </header>
 
+        <!-- Sidebar lateral de canales (oculto por defecto) -->
+        <aside id="channelSidebar" class="channel-sidebar">
+  <ul>
+    <li data-channel="general" class="active">General</li>
+    <li data-channel="ideas">Ideas</li>
+    <li data-channel="bugs">Bugs</li>
+  </ul>
+</aside>
 
         <!-- Chat principal -->
-
         <main class="chat-main">
             <div id="messages" class="messages"></div>
-
         </main>
+
         <!-- Input -->
         <form id="chatForm" class="chat-input">
             <input type="text" id="messageInput" placeholder="Escribe un mensaje..." autocomplete="off" required />
@@ -52,6 +59,22 @@
         </ul>
     </aside>
 
+    <script type="module">
+        const menuBtn = document.getElementById("menuBtn");
+        const channelSidebar = document.getElementById("channelSidebar");
+
+        // Inicialmente oculto
+        channelSidebar.style.display = "none";
+
+        // Toggle al hacer click
+        menuBtn.addEventListener("click", () => {
+            if (channelSidebar.style.display === "none") {
+                channelSidebar.style.display = "block";
+            } else {
+                channelSidebar.style.display = "none";
+            }
+        });
+    </script>
     <script type="module" src="./js/chat.js"></script>
 </body>
 

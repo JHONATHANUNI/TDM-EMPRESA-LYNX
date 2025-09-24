@@ -1,35 +1,25 @@
-// public/js/web/chatSocket.js
 import { addMessage, addSystemMessage, updateUserList } from "../ui/chatUI.js";
 
 let socket;
 let currentGroup = "general";
 let currentUserName = "";
+let msgCounter = 0; // contador de mensajes para evitar duplicados
 
 function safeParse(data) {
-  try {
-    return JSON.parse(data);
-  } catch (err) {
-    console.error("JSON parse error:", err, data);
-    return null;
-  }
+  try { return JSON.parse(data); } 
+  catch (err) { console.error("JSON parse error:", err, data); return null; }
 }
 
 export function connect(user, group = "general") {
-  currentGroup = group || "general";
-  currentUserName = user?.name || user;
+  currentGroup = group;
+  currentUserName = user.name;
 
   const wsBase = location.hostname === "localhost" ? "ws://localhost:3001" : `wss://${location.host}`;
   const wsUrl = `${wsBase}?group=${encodeURIComponent(currentGroup)}`;
-
   socket = new WebSocket(wsUrl);
 
   socket.addEventListener("open", () => {
-    // enviar login con group para que el servidor ubique al cliente en la sala
-    socket.send(JSON.stringify({
-      type: "login",
-      user,
-      group: currentGroup
-    }));
+    socket.send(JSON.stringify({ type: "login", user, group: currentGroup }));
     console.log("WS conectado en grupo:", currentGroup);
   });
 
@@ -37,16 +27,20 @@ export function connect(user, group = "general") {
     const data = safeParse(event.data);
     if (!data) return;
 
-    // Si el servidor envía group, respetarlo; si no, asumimos currentGroup
     const msgGroup = data.group || currentGroup;
-    if (msgGroup !== currentGroup) {
-      // Ignorar mensajes de otras salas
-      return;
-    }
+    if (msgGroup !== currentGroup) return;
+
+    // Generar un ID único para cada mensaje
+    const msgId = data.id || `${data.user}-${msgCounter++}`;
 
     switch (data.type) {
       case "chat":
-        addMessage(data.user, data.text, data.user === currentUserName);
+        addMessage(
+          { name: data.user, img: data.img || '', connected: true },
+          data.text,
+          data.user === currentUserName,
+          msgId
+        );
         break;
       case "system":
         addSystemMessage(data.text);
@@ -59,22 +53,11 @@ export function connect(user, group = "general") {
     }
   });
 
-  socket.addEventListener("close", () => {
-    console.log("WS cerrado");
-  });
-
-  socket.addEventListener("error", (err) => {
-    console.error("WS error:", err);
-  });
+  socket.addEventListener("close", () => console.log("WS cerrado"));
+  socket.addEventListener("error", err => console.error("WS error:", err));
 }
 
 export function sendMessage(user, text, group = currentGroup) {
   if (!socket || socket.readyState !== WebSocket.OPEN) return;
-  socket.send(JSON.stringify({
-    type: "chat",
-    user,
-    text,
-    group
-  }));
+  socket.send(JSON.stringify({ type: "chat", user, text, group, id: `${user}-${Date.now()}` }));
 }
-

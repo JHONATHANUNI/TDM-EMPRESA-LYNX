@@ -1,3 +1,6 @@
+/* ================================
+   ESTILOS GLOBALES
+================================ */
 body {
     height: 100%;
     width: 100%;
@@ -7,25 +10,30 @@ body {
     align-items: center;
     background: #000;
     font-family: "Segoe UI", Roboto, sans-serif;
+    margin: 0;
 }
 
-/* Contenedor principal tipo móvil */
+/* ================================
+   CONTENEDOR PRINCIPAL
+================================ */
 .chat-container {
     display: flex;
     flex-direction: column;
     height: 90vh;
     width: 100%;
     max-width: 380px;
-    background-color: var(--color-background, #fff);
+    background-color: #fff;
     border-radius: 14px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
     overflow: hidden;
     padding-top: 70px;
     box-sizing: border-box;
     position: relative;
 }
 
-/* Header */
+/* ================================
+   HEADER
+================================ */
 .chat-header {
     position: fixed;
     top: 0;
@@ -37,15 +45,14 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: #fff; /* fondo blanco */
-    color: #000; /* texto negro */
+    background: #fff;
+    color: #000;
     padding: 0 1rem;
     z-index: 200;
     border-radius: 14px 14px 0 0;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1); /* sombra sutil */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Logo y hamburguesa */
 .logo-and-hamburger {
     display: flex;
     align-items: center;
@@ -53,8 +60,14 @@ body {
 }
 
 .chat-logo {
-    height: 50px;
+    height: 60px;
     width: auto;
+}
+
+@media (max-width: 480px) {
+    .chat-logo {
+        height: 50px;
+    }
 }
 
 .menu-btn {
@@ -62,7 +75,7 @@ body {
     background: none;
     border: none;
     cursor: pointer;
-    color: #000; /* negro */
+    color: #000;
     transition: transform 0.2s ease;
 }
 
@@ -70,27 +83,23 @@ body {
     transform: scale(1.1);
 }
 
-/* Nombre centrado */
 .chat-header h2 {
     margin: 0;
     font-size: 1.2rem;
     flex: 1;
     text-align: center;
-    color: #000; /* negro */
+    color: #000;
 }
 
-/* Botones a la derecha */
 .header-actions .icon-btn {
-    color: #000; /* negro */
+    color: #000;
 }
-
 
 .icon-btn {
     background: none;
     border: none;
     cursor: pointer;
     font-size: 1.5rem;
-    color: var(--color-white);
     transition: transform 0.2s ease;
 }
 
@@ -98,7 +107,9 @@ body {
     transform: scale(1.1);
 }
 
-/* Main chat */
+/* ================================
+   CHAT PRINCIPAL
+================================ */
 .chat-main {
     flex: 1;
     overflow-y: auto;
@@ -113,32 +124,88 @@ body {
 .messages {
     display: flex;
     flex-direction: column;
+    gap: 0.5rem;
 }
 
-/* Mensajes */
-.message {
-    margin-top: 0.8rem;
-    padding: 0.5rem 1rem;
+/* ================================
+   MENSAJES
+================================ */
+.message-container {
+    display: flex;
+    align-items: flex-start;
+    margin-top: 0.5rem;
+    max-width: 100%;
+}
+
+.message-container.self {
+    flex-direction: row-reverse;
+}
+
+/* Avatar */
+.avatar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 0.5rem;
+    margin-left: 0.5rem;
+    width: 40px;
+    flex-shrink: 0;
+}
+
+.avatar-container .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Estado solo dentro de mensajes */
+.messages .avatar-container .status {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-top: 2px;
+    border: 2px solid #fff;
+}
+
+.status.online {
+    background: #4caf50;
+}
+
+.status.offline {
+    background: #ff3b30;
+}
+
+/* Contenido del mensaje */
+.message-content {
     max-width: 70%;
-    word-wrap: break-word;
-    display: block;
+    padding: 0.5rem 1rem;
     border-radius: 12px;
-}
-
-.message:not(.self):not(.system) {
-    align-self: flex-start;
+    display: flex;
+    flex-direction: column;
     background: #f0f0f0;
-    color: #000;
-    border-bottom-left-radius: 0;
+    word-wrap: break-word;
 }
 
-.message.self {
-    align-self: flex-end;
+.message-container.self .message-content {
     background: #00d8ff;
     color: #fff;
-    border-bottom-right-radius: 0;
 }
 
+/* Alias */
+.message-alias {
+    font-weight: 600;
+    font-size: 0.85rem;
+    margin-bottom: 4px;
+}
+
+/* Texto */
+.message-text {
+    font-size: 1rem;
+    word-wrap: break-word;
+}
+
+/* Mensajes del sistema */
 .message.system {
     align-self: stretch;
     color: #00d8ff;
@@ -147,119 +214,9 @@ body {
     max-width: 100%;
 }
 
-/* Contenedor de cada mensaje con avatar */
-.message-container {
-    display: flex;
-    align-items: flex-start;
-    margin-top: 0.8rem;
-    max-width: 90%;
-}
-
-/* Mensajes propios alineados a la derecha */
-.message-container.self {
-    flex-direction: row-reverse;
-}
-
-/* Contenedor de avatar */
-.avatar-container {
-    position: relative;
-    width: 40px;
-    height: 40px;
-    margin: 0 0.5rem;
-}
-
-.avatar {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    object-fit: cover;
-}
-
-/* Estado online/offline */
-.status {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    border: 2px solid #fff;
-}
-
-.status.online {
-    background: #4caf50;
-}
-
-.status.offline {
-    background: #bbb;
-}
-
-/* Contenedor del mensaje con avatar */
-.message-container {
-    display: flex;
-    align-items: flex-end;
-    margin-top: 0.5rem;
-    max-width: 85%;
-}
-
-/* Mensajes propios a la derecha */
-.message-container.self {
-    flex-direction: row-reverse;
-}
-
-/* Avatar pequeño */
-.avatar-container {
-    width: 32px;
-    height: 32px;
-    position: relative;
-    margin: 0 0.5rem;
-}
-
-.avatar {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    object-fit: cover;
-}
-
-/* Estado online/offline al lado del avatar */
-.status {
-    position: absolute;
-    bottom: 0;
-    right: -2px;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    border: 2px solid #fff;
-}
-
-.status.online {
-    background: #4caf50;
-}
-
-.status.offline {
-    background: #bbb;
-}
-
-/* Contenido del mensaje */
-.message-content {
-    padding: 0.5rem 1rem;
-    border-radius: 16px;
-    word-wrap: break-word;
-    background: #f0f0f0;
-    font-size: 0.95rem;
-}
-
-/* Mensajes propios */
-.message-container.self .message-content {
-    background: #00d8ff;
-    color: #fff;
-}
-
-
-
-
-/* Input */
+/* ================================
+   INPUT
+================================ */
 .chat-input {
     display: flex;
     padding: 0.8rem;
@@ -294,7 +251,10 @@ body {
     background: #00bcd4;
 }
 
-/* Responsive */
+
+/* ================================
+   RESPONSIVE
+================================ */
 @media (max-width: 480px) {
     .chat-container {
         width: 100%;
@@ -303,7 +263,7 @@ body {
     }
 
     .chat-logo {
-        height: 40px;
+        height: 50px;
     }
 
     .chat-header h2 {
@@ -320,5 +280,95 @@ body {
 
     .chat-main {
         background-size: 150px;
+    }
+}
+
+
+
+
+
+
+
+/* ================================
+   SIDEBAR DE CANALES (HAMBURGUESA)
+================================ */
+.channel-sidebar {
+    position: fixed;
+    top: 50%;                          /* verticalmente centrado */
+    left: 50%;                         /* horizontalmente centrado */
+    transform: translate(-50%, -50%);  /* centro exacto */
+    width: 240px;                       /* ancho del cuadro */
+    max-height: 350px;                  /* altura máxima */
+    background: #ffffff;                /* fondo limpio */
+    border-radius: 16px;                /* esquinas redondeadas */
+    box-shadow: 0 12px 24px rgba(0,0,0,0.25); /* sombra elegante */
+    padding: 0.8rem;
+    display: none;                       /* oculto hasta click */
+    overflow-y: auto;                    /* scroll si hay muchos canales */
+    z-index: 300;
+    border: 1px solid #e0e0e0;          /* borde suave */
+}
+
+/* Mostrar cuando se presiona el botón hamburguesa */
+.channel-sidebar.show {
+    display: block;
+}
+
+/* Lista de canales */
+.channel-sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.channel-sidebar li {
+    padding: 0.6rem 1rem;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+    background-color: #f0f0f0;
+    color: #000;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05); /* suaviza el cuadro */
+}
+
+.channel-sidebar li:hover {
+    background-color: #00d8ff;
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15); /* resalta al pasar el mouse */
+}
+
+.channel-sidebar li.active {
+    background-color: #00bcd4;
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* Scroll bonito */
+.channel-sidebar::-webkit-scrollbar {
+    width: 6px;
+}
+.channel-sidebar::-webkit-scrollbar-thumb {
+    background-color: rgba(0,0,0,0.2);
+    border-radius: 3px;
+}
+
+/* Responsive móvil compacto */
+@media (max-width: 480px) {
+    .channel-sidebar {
+        width: 220px;                  /* ancho menor para móvil */
+        max-height: 300px;             /* altura menor para que no ocupe toda la pantalla */
+        padding: 0.6rem;
+    }
+
+    .channel-sidebar ul { gap: 0.5rem; }
+
+    .channel-sidebar li {
+        padding: 0.5rem 0.8rem;
+        font-size: 0.9rem;
     }
 }

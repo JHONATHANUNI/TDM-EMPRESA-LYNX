@@ -26,9 +26,44 @@ const logoutBtn = document.getElementById("logoutBtn");
 const sidebar = document.getElementById("userSidebar");
 const toggleBtn = document.getElementById("usersToggle");
 const closeBtn = document.getElementById("closeSidebar");
-const messagesContainer = document.getElementById("messages");
 
-// Botón volver a grupos
+// ------------------- NUEVO: Sidebar de canales -------------------
+const channelSidebar = document.getElementById("channelSidebar");
+const channelItems = channelSidebar ? channelSidebar.querySelectorAll("li") : [];
+const menuBtn = document.getElementById("menuBtn");
+
+if (menuBtn && channelSidebar) {
+  // Abrir/cerrar sidebar
+  menuBtn.addEventListener("click", () => {
+    channelSidebar.classList.toggle("show");
+  });
+
+  // Cambiar de canal
+  channelItems.forEach(item => {
+    item.addEventListener("click", () => {
+      const newChannel = item.getAttribute("data-channel");
+      if (newChannel === currentGroup) return; // mismo canal, no hacer nada
+
+      // Limpiar mensajes actuales
+      const messagesEl = document.getElementById("messages");
+      if (messagesEl) messagesEl.innerHTML = "";
+
+      // Actualizar la clase activa
+      channelItems.forEach(i => i.classList.remove("active"));
+      item.classList.add("active");
+
+      // Cambiar canal actual y reconectar
+      currentGroup = newChannel;
+      if (window.socket) window.socket.close(); // cerrar conexión anterior
+      connect(user, currentGroup);
+
+      // Ocultar sidebar en móvil
+      channelSidebar.classList.remove("show");
+    });
+  });
+}
+// ------------------- FIN NUEVO -------------------
+
 (function addBackToGroupsButton() {
   const headerActions = document.querySelector(".header-actions");
   if (!headerActions) return;
@@ -42,81 +77,48 @@ const messagesContainer = document.getElementById("messages");
   backBtn.addEventListener("click", () => window.location.href = "groups.html");
 })();
 
-// Conectar WS
 try {
-  connect(user, currentGroup, (msg) => {
-    // Mensaje recibido por WS
-    if (msg.user === user.name) return; // No duplicar mensajes locales
-    addMessage(msg, msg.text, false);
-  });
+  connect(user, currentGroup);
 } catch (err) {
   console.error("❌ Error conectando al chat:", err);
   alert("No se pudo conectar al chat. Intenta de nuevo más tarde.");
   window.location.href = "groups.html";
 }
 
-// Función para agregar mensaje al DOM
-export function addMessage(userObj, text, self = false, system = false) {
-  const container = document.createElement("div");
-
-  if (system) {
-    container.classList.add("message", "system");
-    container.textContent = text;
-  } else {
-    container.classList.add("message-container");
-    if (self) container.classList.add("self");
-
-    // Avatar y estado
-    const avatarDiv = document.createElement("div");
-    avatarDiv.classList.add("avatar-container");
-
-    const avatarImg = document.createElement("img");
-    avatarImg.classList.add("avatar");
-    avatarImg.src = userObj.avatar || "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Cristiano_Ronaldo_playing_for_Al_Nassr_FC_against_Persepolis%2C_September_2023_%28cropped%29.jpg/250px-Cristiano_Ronaldo_playing_for_Al_Nassr_FC_against_Persepolis%2C_September_2023_%28cropped%29.jpg";
-    avatarDiv.appendChild(avatarImg);
-
-    const statusSpan = document.createElement("span");
-    statusSpan.classList.add("status");
-    statusSpan.classList.add(userObj.online ? "online" : "offline");
-    avatarDiv.appendChild(statusSpan);
-
-    // Contenido del mensaje
-    const content = document.createElement("div");
-    content.classList.add("message-content");
-
-    const p = document.createElement("p");
-    p.classList.add("message-text");
-    p.textContent = text;
-
-    content.appendChild(p);
-
-    container.appendChild(avatarDiv);
-    container.appendChild(content);
-  }
-
-  messagesContainer.appendChild(container);
-  messagesContainer.scrollTop = messagesContainer.scrollHeight;
-}
-
 // Enviar mensaje propio
 if (chatForm && messageInput) {
- chatForm.addEventListener("submit", (e) => {
-  e.preventDefault();
-  const text = messageInput.value.trim();
-  if (!text) return;
+  chatForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const text = messageInput.value.trim();
+    if (!text) return;
 
-  // Solo enviar al servidor, el WS mostrará el mensaje
-  sendMessage(user.name, text, currentGroup);
+    const selfUser = {
+      name: user.name,
+      img: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Cristiano_Ronaldo_playing_for_Al_Nassr_FC_against_Persepolis%2C_September_2023_%28cropped%29.jpg/250px-Cristiano_Ronaldo_playing_for_Al_Nassr_FC_against_Persepolis%2C_September_2023_%28cropped%29.jpg",
+      connected: true
+    };
 
-  messageInput.value = "";
-  messageInput.focus();
-});
+    import("./ui/chatUI.js").then(module => {
+      /*  module.addMessage(selfUser, text, true);*/
+    });
 
-
-  messageInput.focus();
+    sendMessage(user.name, text, currentGroup);
+    messageInput.value = "";
+    messageInput.focus();
+  });
 }
 
-// Botones
-if (logoutBtn) logoutBtn.addEventListener("click", () => { clearUser(); redirectToLogin(); });
-if (toggleBtn) toggleBtn.addEventListener("click", () => showUserList(sidebar, true));
-if (closeBtn) closeBtn.addEventListener("click", () => showUserList(sidebar, false));
+if (logoutBtn) {
+  logoutBtn.addEventListener("click", () => {
+    clearUser();
+    redirectToLogin();
+  });
+}
+
+if (toggleBtn) {
+  toggleBtn.addEventListener("click", () => showUserList(sidebar, true));
+}
+
+if (closeBtn) {
+  closeBtn.addEventListener("click", () => showUserList(sidebar, false));
+}

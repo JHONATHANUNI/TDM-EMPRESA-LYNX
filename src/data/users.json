@@ -15,4 +15,87 @@
         "rol": "user",
         "img": "https://i.pravatar.cc/150?img=2"
     }
+    ,
+    {
+        "id": 2,
+        "name": "Admin2",
+        "password": "admin234",
+        "email": "admin2@chat.com",
+        "rol": "admin",
+        "img": "https://i.pravatar.cc/150?img=2"
+    },
+    {
+        "id": 3,
+        "name": "Admin3",
+        "password": "admin345",
+        "email": "admin3@chat.com",
+        "rol": "admin",
+        "img": "https://i.pravatar.cc/150?img=3"
+    },
+    {
+        "id": 5,
+        "name": "Usuario2",
+        "password": "user234",
+        "email": "usuario2@chat.com",
+        "rol": "user",
+        "img": "https://i.pravatar.cc/150?img=5"
+    },
+    {
+        "id": 6,
+        "name": "Usuario3",
+        "password": "user345",
+        "email": "usuario3@chat.com",
+        "rol": "user",
+        "img": "https://i.pravatar.cc/150?img=6"
+    },
+    {
+        "id": 7,
+        "name": "Usuario4",
+        "password": "user456",
+        "email": "usuario4@chat.com",
+        "rol": "user",
+        "img": "https://i.pravatar.cc/150?img=7"
+    },
+    {
+        "id": 8,
+        "name": "Usuario5",
+        "password": "user567",
+        "email": "usuario5@chat.com",
+        "rol": "user",
+        "img": "https://i.pravatar.cc/150?img=8"
+    },
+    {
+        "id": 9,
+        "name": "Usuario6",
+        "password": "user678",
+        "email": "usuario6@chat.com",
+        "rol": "user",
+        "img": "https://i.pravatar.cc/150?img=9"
+    },
+    {
+        "id": 10,
+        "name": "Usuario7",
+        "password": "user789",
+        "email": "usuario7@chat.com",
+        "rol": "user",
+        "img": "https://i.pravatar.cc/150?img=10"
+    },
+    {
+        "id": 11,
+        "name": "Usuario8",
+        "password": "user890",
+        "email": "usuario8@chat.com",
+        "rol": "user",
+        "img": "https://i.pravatar.cc/150?img=11"
+    },
+    {
+        "id": 12,
+        "name": "Usuario9",
+        "password": "user901",
+        "email": "usuario9@chat.com",
+        "rol": "user",
+        "img": "https://i.pravatar.cc/150?img=12"
+    }
 ]
+
+
