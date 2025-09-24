@@ -13,8 +13,8 @@ function setupChat(wss) {
         ws.on("message", (msg) => {
             const data = JSON.parse(msg);
 
+            // 🟢 LOGIN
             if (data.type === "login") {
-                // Guardamos también el grupo
                 currentUser = { 
                     id: data.user.id, 
                     name: data.user.name, 
@@ -25,7 +25,7 @@ function setupChat(wss) {
 
                 console.log(`${new Date().toISOString()} - 🟢 Cliente conectado (${currentUser.name} | Grupo: ${currentUser.group} | ${ip})`);
 
-                // Mensaje de sistema solo para el grupo
+                // Mensaje de sistema SOLO al grupo
                 broadcast(
                     users.filter(u => u.group === currentUser.group),
                     { type: "system", text: `${currentUser.name} se unió al grupo ${currentUser.group}` }
@@ -48,11 +48,18 @@ function setupChat(wss) {
                 );
             }
 
+            // 💬 CHAT
             if (data.type === "chat") {
                 // Solo enviar mensajes al grupo correspondiente
                 broadcast(
                     users.filter(u => u.group === currentUser.group),
-                    { type: "chat", user: data.user, text: data.text }
+                    { 
+                        type: "chat", 
+                        user: data.user, 
+                        text: data.text,
+                        group: currentUser.group, // 🔥 FIX: incluir grupo
+                        id: Date.now()            // 🔥 FIX: ID único del mensaje
+                    }
                 );
             }
         });
@@ -62,7 +69,7 @@ function setupChat(wss) {
                 console.log(`${new Date().toISOString()} - 🔴 Cliente desconectado (${currentUser.name} | Grupo: ${currentUser.group} | ${ip})`);
                 users = users.filter(u => u !== currentUser);
 
-                // Mensaje de sistema solo para el grupo
+                // Mensaje de sistema SOLO al grupo
                 broadcast(
                     users.filter(u => u.group === currentUser.group),
                     { type: "system", text: `${currentUser.name} salió del grupo ${currentUser.group}` }
@@ -89,3 +96,4 @@ function setupChat(wss) {
 }
 
 module.exports = setupChat;
+

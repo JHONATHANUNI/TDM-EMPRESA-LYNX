@@ -1,7 +1,7 @@
 [
     {
         "id": 1,
-        "name": "Admin",
+        "name": "@Admin",
         "password": "1234",
         "email": "admin@chat.com",
         "rol": "admin",
@@ -9,7 +9,7 @@
     },
     {
         "id": 2,
-        "name": "Usuario",
+        "name": "@Usuario",
         "password": "abcd",
         "email": "user@chat.com",
         "rol": "user",
@@ -18,7 +18,7 @@
     ,
     {
         "id": 2,
-        "name": "Admin2",
+        "name": "@Fernando",
         "password": "admin234",
         "email": "admin2@chat.com",
         "rol": "admin",
@@ -26,7 +26,7 @@
     },
     {
         "id": 3,
-        "name": "Admin3",
+        "name": "@Sara",
         "password": "admin345",
         "email": "admin3@chat.com",
         "rol": "admin",
@@ -34,7 +34,7 @@
     },
     {
         "id": 5,
-        "name": "Usuario2",
+        "name": "@Jhonathan",
         "password": "user234",
         "email": "usuario2@chat.com",
         "rol": "user",
@@ -42,7 +42,7 @@
     },
     {
         "id": 6,
-        "name": "Usuario3",
+        "name": "@Alex",
         "password": "user345",
         "email": "usuario3@chat.com",
         "rol": "user",
@@ -50,7 +50,7 @@
     },
     {
         "id": 7,
-        "name": "Usuario4",
+        "name": "@David",
         "password": "user456",
         "email": "usuario4@chat.com",
         "rol": "user",
@@ -58,7 +58,7 @@
     },
     {
         "id": 8,
-        "name": "Usuario5",
+        "name": "@Carlos",
         "password": "user567",
         "email": "usuario5@chat.com",
         "rol": "user",
@@ -66,7 +66,7 @@
     },
     {
         "id": 9,
-        "name": "Usuario6",
+        "name": "@Jerson",
         "password": "user678",
         "email": "usuario6@chat.com",
         "rol": "user",
@@ -74,7 +74,7 @@
     },
     {
         "id": 10,
-        "name": "Usuario7",
+        "name": "@Luis",
         "password": "user789",
         "email": "usuario7@chat.com",
         "rol": "user",
@@ -82,7 +82,7 @@
     },
     {
         "id": 11,
-        "name": "Usuario8",
+        "name": "@Mateo",
         "password": "user890",
         "email": "usuario8@chat.com",
         "rol": "user",
@@ -90,7 +90,7 @@
     },
     {
         "id": 12,
-        "name": "Usuario9",
+        "name": "@Juan",
         "password": "user901",
         "email": "usuario9@chat.com",
         "rol": "user",
