@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Grupos - Lynx Chat</title>
+  <link rel="stylesheet" href="./css/global.css">
+  <link rel="stylesheet" href="./css/groups.css">
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+  <div class="groups-container">
+    <!-- Header con logo y estado -->
+    <header class="header">
+      <div class="logo-status">
+        <img src="css/logocss.png" alt="Lynx Startups" class="logo" />
+      </div>
+      <button class="menu-btn">☰</button>
+    </header>
+
+    <!-- Botones de grupo -->
+    <div class="buttons-container">
+
+      <button class="group-btn btn-general" data-group="general">
+        <span class="icon"><img src="css/logocss.png" alt="General"></span>
+        <span class="label">GENERAL</span>
+        <span class="status online"></span>
+      </button>
+
+      <button class="group-btn btn-soporte" data-group="bugs">
+        <span class="icon"><img src="css/logocss.png" alt="Bugs"></span>
+        <span class="label">BUGS</span>
+        <span class="status online"></span>
+      </button>
+
+      <button class="group-btn btn-programacion" data-group="ideas">
+        <span class="icon"><img src="css/logocss.png" alt="Ideas"></span>
+        <span class="label">IDEAS</span>
+        <span class="status online"></span>
+      </button>
+
+      <button class="btn-logout" id="logoutBtn">
+        <i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión
+      </button>
+    </div>
+  </div>
+
+  <script>
+    // Redirección a chat con el parámetro correcto
+    document.querySelectorAll(".group-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const group = btn.dataset.group;
+        window.location.href = `chat.html?group=${group}`;
+      });
+    });
+
+    // Cerrar sesión limpiando localStorage
+    document.getElementById("logoutBtn").addEventListener("click", () => {
+      localStorage.removeItem("user");
+      window.location.href = "login.html";
+    });
+
+    // Simulación de estado online/offline en todos los grupos
+    const statusIndicators = document.querySelectorAll(".status");
+    let online = true;
+
+    setInterval(() => {
+      online = !online;
+      statusIndicators.forEach(indicator => {
+        indicator.className = `status ${online ? "online" : "offline"}`;
+      });
+    }, 5000); // cambia cada 5 segundos (demo)
+  </script>
+</body>
+
+</html>

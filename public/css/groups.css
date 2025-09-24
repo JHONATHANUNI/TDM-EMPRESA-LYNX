@@ -1,0 +1,172 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #000; /* fondo negro fuera del contenedor */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-family: "Segoe UI", Roboto, sans-serif;
+}
+
+/* Contenedor principal */
+.groups-container {
+  width: 100%;
+  max-width: 380px;       /* tipo móvil */
+  min-height: 90vh;
+  background: #fff;
+  border-radius: 14px;
+  padding: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+/* Header */
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Logo + estado */
+.logo-status {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logo {
+  height: 80px;
+  width: auto;
+}
+
+/* Botón menú hamburguesa */
+.menu-btn {
+  font-size: 1.6rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #000;
+  transition: transform 0.2s ease;
+}
+
+.menu-btn:hover {
+  transform: scale(1.1);
+}
+
+/* Contenedor de botones */
+.buttons-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 4rem;
+  width: 100%;
+  max-width: 280px;
+}
+
+/* Botones de grupo - con logo a la izquierda y estado a la derecha */
+.group-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* separa logo y estado */
+   gap: 8px;  /* espacio entre logo, nombre y estado */
+  background: #f7f7f7;
+  border: 2px solid #ddd;
+  border-radius: 12px;
+  padding: 0.8rem 1rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #000;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.group-btn:hover {
+  background: #e6faff;
+  border-color: #00d8ff;
+  box-shadow: 0px 4px 12px rgba(0, 216, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+.group-btn .icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-right: 10px;
+  flex-shrink: 0;
+}
+
+.group-btn .icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.group-btn .label {
+  flex: 1;
+  text-align: left;
+}
+
+.group-btn .status {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  box-shadow: 0 0 5px rgba(0,0,0,0.2);
+}
+
+.group-btn .status.online {
+  background: #4caf50; /* verde conectado */
+}
+
+.group-btn .status.offline {
+  background: #007bff; /* azul desconectado */
+}
+
+/* Botón logout */
+.btn-logout {
+  background: #ff4d4d;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 2rem;
+}
+
+.btn-logout:hover {
+  background: #ff3333;
+  transform: scale(1.05);
+  box-shadow: 0px 4px 12px rgba(255, 77, 77, 0.4);
+}
+
+/* Responsive móvil */
+@media (max-width: 480px) {
+  .groups-container {
+    max-width: 100%;
+    min-height: 100vh;
+    border-radius: 0;
+  }
+
+  .logo {
+    height: 45px;
+  }
+
+  .buttons-container {
+    max-width: 100%;
+  }
+}
+
