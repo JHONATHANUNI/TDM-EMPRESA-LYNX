@@ -18,8 +18,8 @@ body {
 /* Contenedor principal */
 .groups-container {
   width: 100%;
-  max-width: 380px;       /* tipo móvil */
-  min-height: 90vh;
+  max-width: 340px;       /* tipo móvil */
+  min-height: 657px;
   background: #fff;
   border-radius: 14px;
   padding: 1.2rem;
@@ -136,7 +136,7 @@ body {
 
 /* Botón logout */
 .btn-logout {
-  background: #ff4d4d;
+  background:#007bff;
   color: white;
   border: none;
   border-radius: 10px;

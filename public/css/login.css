@@ -4,8 +4,8 @@
     padding: 2.5rem;
     border-radius: var(--radius-lg);
     box-shadow: 0 8px 24px rgba(0,0,0,0.15);
-    max-width: 380px;
-    min-height: 600px;
+    max-width: 340px;
+    min-height: 657px;
     margin: 60px auto;
     display: flex;
     flex-direction: column;

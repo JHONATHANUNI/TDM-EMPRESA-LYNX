@@ -1,6 +1,7 @@
 import { connect, sendMessage } from "./web/chatSocket.js";
 import { showUserList, clearUser, redirectToLogin } from "./ui/chatUI.js";
 
+
 const stored = localStorage.getItem("user");
 const user = stored ? JSON.parse(stored) : null;
 if (!user) redirectToLogin();
@@ -28,15 +29,34 @@ const toggleBtn = document.getElementById("usersToggle");
 const closeBtn = document.getElementById("closeSidebar");
 
 // ------------------- NUEVO: Sidebar de canales -------------------
+
 const channelSidebar = document.getElementById("channelSidebar");
 const channelItems = channelSidebar ? channelSidebar.querySelectorAll("li") : [];
 const menuBtn = document.getElementById("menuBtn");
+const closeChannelSidebar = document.getElementById("closeChannelSidebar");
 
 if (menuBtn && channelSidebar) {
-  // Abrir/cerrar sidebar
+  // Abrir/cerrar sidebar con hamburguesa
   menuBtn.addEventListener("click", () => {
-    channelSidebar.classList.toggle("show");
+    channelSidebar.classList.add("show");
   });
+
+// Cerrar sidebar con la X
+  if (closeChannelSidebar) {
+    closeChannelSidebar.addEventListener("click", () => {
+      console.log("Click en X"); // 👈 debug
+      channelSidebar.classList.remove("show");
+    });
+  }
+// Cerrar al dar click afuera del modal
+  document.addEventListener("click", (e) => {
+  if (channelSidebar.classList.contains("show") &&
+      !channelSidebar.contains(e.target) &&
+      e.target !== menuBtn) {
+    channelSidebar.classList.remove("show");
+  }
+});
+
 
   // Cambiar de canal
   channelItems.forEach(item => {
@@ -62,6 +82,9 @@ if (menuBtn && channelSidebar) {
     });
   });
 }
+
+
+
 // ------------------- FIN NUEVO -------------------
 
 (function addBackToGroupsButton() {
@@ -114,11 +137,30 @@ if (logoutBtn) {
     redirectToLogin();
   });
 }
+if (toggleBtn && sidebar) {
+  toggleBtn.addEventListener("click", () => {
+    sidebar.classList.add("active");
 
-if (toggleBtn) {
-  toggleBtn.addEventListener("click", () => showUserList(sidebar, true));
+    // Crear overlay si no existe
+    let overlay = document.getElementById("userOverlay");
+    if (!overlay) {
+      overlay = document.createElement("div");
+      overlay.id = "userOverlay";
+      document.body.appendChild(overlay);
+
+      // Cerrar al hacer click en overlay
+      overlay.addEventListener("click", () => {
+        sidebar.classList.remove("active");
+        overlay.remove();
+      });
+    }
+  });
 }
 
-if (closeBtn) {
-  closeBtn.addEventListener("click", () => showUserList(sidebar, false));
+if (closeBtn && sidebar) {
+  closeBtn.addEventListener("click", () => {
+    sidebar.classList.remove("active");
+    const overlay = document.getElementById("userOverlay");
+    if (overlay) overlay.remove();
+  });
 }
