@@ -19,7 +19,7 @@
     {
         "id": 2,
         "name": "@Fernando",
-        "password": "admin234",
+        "password": "12345",
         "email": "admin2@chat.com",
         "rol": "admin",
         "img": "https://i.pravatar.cc/150?img=2"
@@ -27,7 +27,7 @@
     {
         "id": 3,
         "name": "@Sara",
-        "password": "admin345",
+        "password": "123456",
         "email": "admin3@chat.com",
         "rol": "admin",
         "img": "https://i.pravatar.cc/150?img=3"
@@ -35,7 +35,7 @@
     {
         "id": 5,
         "name": "@Jhonathan",
-        "password": "user234",
+        "password": "Cin1234",
         "email": "usuario2@chat.com",
         "rol": "user",
         "img": "https://i.pravatar.cc/150?img=5"
@@ -43,7 +43,7 @@
     {
         "id": 6,
         "name": "@Alex",
-        "password": "user345",
+        "password": "123456789",
         "email": "usuario3@chat.com",
         "rol": "user",
         "img": "https://i.pravatar.cc/150?img=6"
@@ -51,7 +51,7 @@
     {
         "id": 7,
         "name": "@David",
-        "password": "user456",
+        "password": "987654321",
         "email": "usuario4@chat.com",
         "rol": "user",
         "img": "https://i.pravatar.cc/150?img=7"
@@ -59,7 +59,7 @@
     {
         "id": 8,
         "name": "@Carlos",
-        "password": "user567",
+        "password": "246810",
         "email": "usuario5@chat.com",
         "rol": "user",
         "img": "https://i.pravatar.cc/150?img=8"
@@ -67,15 +67,15 @@
     {
         "id": 9,
         "name": "@Jerson",
-        "password": "user678",
+        "password": "0000",
         "email": "usuario6@chat.com",
         "rol": "user",
         "img": "https://i.pravatar.cc/150?img=9"
     },
     {
         "id": 10,
-        "name": "@Luis",
-        "password": "user789",
+        "name": "@Andres",
+        "password": "243416",
         "email": "usuario7@chat.com",
         "rol": "user",
         "img": "https://i.pravatar.cc/150?img=10"
@@ -83,15 +83,15 @@
     {
         "id": 11,
         "name": "@Mateo",
-        "password": "user890",
+        "password": "00000",
         "email": "usuario8@chat.com",
         "rol": "user",
         "img": "https://i.pravatar.cc/150?img=11"
     },
     {
         "id": 12,
-        "name": "@Juan",
-        "password": "user901",
+        "name": "@Zhari",
+        "password": "313469",
         "email": "usuario9@chat.com",
         "rol": "user",
         "img": "https://i.pravatar.cc/150?img=12"

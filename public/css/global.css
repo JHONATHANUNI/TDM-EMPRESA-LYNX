@@ -37,7 +37,7 @@ body {
     font-family: Inter, sans-serif;
     margin: 0;
     padding: 0;
-    background: linear-gradient(135deg, var(--color-black), var(--color-black));
+    background: linear-gradient(135deg, var(--color-black), var(--color-white));
     display: flex;
     height: 100vh;
     align-items: center;

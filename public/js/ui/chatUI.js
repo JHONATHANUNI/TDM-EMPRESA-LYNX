@@ -37,56 +37,11 @@ export function addMessage(userObj, text, self = false, msgId = null) {
   contentDiv.appendChild(strong);
   contentDiv.appendChild(p);
 
-  // Botones de acción si es tu mensaje
-  if (self) {
-    const actionsDiv = document.createElement("div");
-    actionsDiv.classList.add("message-actions");
-
-    const editBtn = document.createElement("button");
-    editBtn.textContent = "Editar";
-    editBtn.addEventListener("click", () => editMessage(msgId));
-
-    const delBtn = document.createElement("button");
-    delBtn.textContent = "Eliminar";
-    delBtn.addEventListener("click", () => deleteMessage(msgId));
-
-    actionsDiv.appendChild(editBtn);
-    actionsDiv.appendChild(delBtn);
-    contentDiv.appendChild(actionsDiv);
-  }
 
   container.appendChild(avatarDiv);
   container.appendChild(contentDiv);
   messagesEl.appendChild(container);
   messagesEl.scrollTop = messagesEl.scrollHeight;
-}
-// EDIT MENSAJE
-export function editMessage(msgId) {
-  const msgEl = messagesEl.querySelector(`.message-container[data-id="${msgId}"] p`);
-  if (!msgEl) return;
-  const newText = prompt("Editar mensaje:", msgEl.textContent);
-  if (newText !== null) {
-    msgEl.textContent = newText;
-    // aquí también puedes enviar al servidor el cambio
-    window.socket.send(JSON.stringify({
-      type: "edit",
-      id: msgId,
-      text: newText
-    }));
-  }
-}
-// DELETE MENSAJE
-export function deleteMessage(msgId) {
-  const msgEl = messagesEl.querySelector(`.message-container[data-id="${msgId}"]`);
-  if (!msgEl) return;
-  if (confirm("¿Deseas eliminar este mensaje?")) {
-    msgEl.remove();
-    // enviar al servidor para borrar en todos los clientes
-    window.socket.send(JSON.stringify({
-      type: "delete",
-      id: msgId
-    }));
-  }
 }
 
 // AGREGAR AL SISTEMA UN MENSAJE

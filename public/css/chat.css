@@ -1,430 +1,481 @@
 /* ================================
-   ESTILOS GLOBALES
+   RESET GLOBAL
 ================================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
-    height: 100%;
-    width: 100%;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #000;
-    font-family: "Segoe UI", Roboto, sans-serif;
-    margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  background-image: url("logocss.png");
+  background-repeat: repeat;
+  background-size: 180px;
+  background-position: center;
+  background-attachment: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  color: #333;
+}
+
+/* Logo difuminado en el fondo */
+body::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: url("logocss.png") no-repeat center;
+  background-size: 400px;
+  opacity: 0.08;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
 }
 
 /* ================================
    CONTENEDOR PRINCIPAL
 ================================ */
 .chat-container {
-    display: flex;
-    flex-direction: column;
-    max-width: 340px;
-    min-height: 657px;
-    background-color: #fff;
-    border-radius: 14px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-    overflow: hidden;
-    box-sizing: border-box;
-    position: relative;
+  background: rgba(255, 255, 255, 0.95);
+  width: 100%;
+  max-width: 400px;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  position: relative;
+  z-index: 2;
 }
 
 /* ================================
-   HEADER
+   HEADER COMPLETO
 ================================ */
 .chat-header {
-    position: relative;
-    width: 100%;
-    max-width: 100%;
-    height: 70px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: #fff;
-    color: #000;
-    padding: 0 1rem;
-    z-index: 200;
-    border-radius: 14px 14px 0 0;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    box-sizing: border-box; /* 👈 asegura que padding no expanda */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 15px;
+  background: #ffffff;
+  border-bottom: 1px solid #ccc;
+  border-radius: 16px 16px 0 0;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  position: relative;
+  z-index: 2;
 }
 
+/* Contenedor logo + hamburguesa */
 .logo-and-hamburger {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
+/* Logo circular */
 .chat-logo {
-    height: 60px;
-    width: auto;
+  height: 60px;
+  width: auto;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
-@media (max-width: 480px) {
-    .chat-logo {
-        height: 50px;
-    }
-}
-
+/* Botón de menú hamburguesa */
 .menu-btn {
-    font-size: 1.8rem;
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: #000;
-    transition: transform 0.2s ease;
+  font-size: 1.8rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #2c5364;
+  transition: transform 0.2s ease;
 }
 
 .menu-btn:hover {
-    transform: scale(1.1);
+  transform: scale(1.1);
 }
 
-.chat-header h2 {
-    margin: 0;
-    font-size: 1.2rem;
-    flex: 1;
-    text-align: center;
-    color: #000;
+/* Botones de acción a la derecha (volver, usuarios, salir) */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .header-actions .icon-btn {
-    color: #000;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.4rem;
+  color: #2c5364;
+  transition: transform 0.2s ease, color 0.2s ease;
+  border-radius: 8px;
+  padding: 5px;
 }
 
-.icon-btn {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 1.5rem;
-    transition: transform 0.2s ease;
+.header-actions .icon-btn:hover {
+  transform: scale(1.1);
+  color: #007bff;
 }
 
-.icon-btn:hover {
-    transform: scale(1.1);
+/* Título centrado */
+.chat-header h2 {
+  flex: 1;
+  text-align: center;
+  font-size: 1.2rem;
+  color: #000;
+  margin: 0;
+  pointer-events: none;
 }
 
 /* ================================
    CHAT PRINCIPAL
 ================================ */
 .chat-main {
-    flex: 1;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    padding: 1rem;
-    background-image: url("LYNX_logo_PNG_file_vertical_orientation_024581-2.png");
-    background-size: 250px;
-    background-repeat: no-repeat;
-    background-position: center;
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 1rem;
+  background-image: url("LYNX_logo_PNG_file_vertical_orientation_024581-2.png");
+  background-size: 250px;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .messages {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 /* ================================
    MENSAJES
 ================================ */
 .message-container {
-    display: flex;
-    align-items: flex-start;
-    margin-top: 0.5rem;
-    max-width: 100%;
+  display: flex;
+  align-items: flex-start;
+  margin-top: 0.5rem;
+  max-width: 100%;
 }
 
 .message-container.self {
-    flex-direction: row-reverse;
+  flex-direction: row-reverse;
 }
 
 /* Avatar */
 .avatar-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-right: 0.5rem;
-    margin-left: 0.5rem;
-    width: 40px;
-    flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 0.5rem;
+  margin-left: 0.5rem;
+  width: 40px;
+  flex-shrink: 0;
 }
 
 .avatar-container .avatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    object-fit: cover;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 /* Estado solo dentro de mensajes */
 .messages .avatar-container .status {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    margin-top: 2px;
-    border: 2px solid #fff;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-top: 2px;
+  border: 2px solid #fff;
 }
 
 .status.online {
-    background: #4caf50;
+  background: #4caf50;
 }
 
 .status.offline {
-    background: #ff3b30;
+  background: #ff3b30;
 }
 
 /* Contenido del mensaje */
 .message-content {
-    max-width: 70%;
-    padding: 0.4rem 0.8rem;
-    border-radius: 12px;
-    display: flex;
-    flex-direction: column;
-    background: #007bff;
-    word-wrap: break-word;
-    font-size: 0.9rem;
-    line-height: 1.3;
+  max-width: 70%;
+  padding: 0.4rem 0.8rem;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  background: #007bff;
+  word-wrap: break-word;
+  font-size: 0.9rem;
+  line-height: 1.3;
 }
 
 .message-container.self .message-content {
-    background:#007bff;
-    color: #000000;
+  background: #007bff;
+  color: #000000;
 }
 
 /* Alias */
 .message-alias {
-    font-weight: 600;
-    font-size: 0.85rem;
-    margin-bottom: 4px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  margin-bottom: 4px;
 }
 
 /* Texto */
 .message-text {
-    font-size: 1rem;
-    word-wrap: break-word;
+  font-size: 1rem;
+  word-wrap: break-word;
 }
 
 /* Mensajes del sistema */
 .message.system {
-    align-self: stretch;
-    color: #007bff;
-    text-align: center;
-    padding: 0.8rem;
-    max-width: 100%;
+  align-self: stretch;
+  color: #007bff;
+  text-align: center;
+  padding: 0.8rem;
+  max-width: 100%;
 }
 
-
+/* Botones de acción en mensajes */
 .message-actions button {
-    background: transparent;
-    border: none;
-    color: #000000;
-    font-size: 0.8rem;
-    cursor: pointer;
-    padding: 2px 6px;
-    border-radius: 6px;
-    transition: background 0.2s;
+  background: transparent;
+  border: none;
+  color: #000000;
+  font-size: 0.8rem;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 6px;
+  transition: background 0.2s;
 }
 
 .message-actions button:hover {
-    background: rgba(0,0,0,0.1);
+  background: rgba(0, 0, 0, 0.1);
 }
-
-
-
-
-
-
-
 
 /* ================================
    INPUT
 ================================ */
 .chat-input {
-    display: flex;
-    padding: 0.8rem;
-    background: #fff;
-    border-top: 1px solid #ddd;
+  display: flex;
+  padding: 0.8rem;
+  background: #fff;
+  border-top: 1px solid #ddd;
 }
 
 .chat-input input {
-    flex: 1;
-    padding: 0.8rem;
-    border: 1px solid #ccc;
-    border-radius: 20px;
-    font-size: 1rem;
+  flex: 1;
+  padding: 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  font-size: 1rem;
 }
 
 .send-btn {
-    margin-left: 0.8rem;
-    background: #00d8ff;
-    border: none;
-    border-radius: 50%;
-    color: white;
-    width: 45px;
-    height: 45px;
-    font-size: 1.2rem;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  margin-left: 0.8rem;
+  background: #00d8ff;
+  border: none;
+  border-radius: 50%;
+  color: white;
+  width: 45px;
+  height: 45px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .send-btn:hover {
-    background: #00bcd4;
+  background: #00bcd4;
 }
 
-
 /* ================================
-   RESPONSIVE
-================================ */
-@media (max-width: 480px) {
-    .chat-container {
-        width: 100%;
-        height: 100vh;
-        border-radius: 0;
-    }
-
-    .chat-logo {
-        height: 50px;
-    }
-
-    .chat-header h2 {
-        font-size: 1rem;
-    }
-
-    .menu-btn {
-        font-size: 1.5rem;
-    }
-
-    .chat-input input {
-        font-size: 0.9rem;
-    }
-
-    .chat-main {
-        background-size: 150px;
-    }
-}
-
-
-
-
-
-
-
-/* ================================
-   SIDEBAR DE CANALES (HAMBURGUESA)
+   SIDEBAR DE CANALES
 ================================ */
 .channel-sidebar {
-    position: fixed;
-    top: 50%;
-    /* verticalmente centrado */
-    left: 50%;
-    /* horizontalmente centrado */
-    transform: translate(-50%, -50%);
-    /* centro exacto */
-    width: 240px;
-    /* ancho del cuadro */
-    max-height: 350px;
-    /* altura máxima */
-    background: #ffffff;
-    /* fondo limpio */
-    border-radius: 16px;
-    /* esquinas redondeadas */
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
-    /* sombra elegante */
-    padding: 0.8rem;
-    display: none;
-    /* oculto hasta click */
-    overflow-y: auto;
-    /* scroll si hay muchos canales */
-    z-index: 300;
-    border: 1px solid #e0e0e0;
-    /* borde suave */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 240px;
+  max-height: 350px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
+  padding: 0.8rem;
+  display: none;
+  overflow-y: auto;
+  z-index: 300;
+  border: 1px solid #e0e0e0;
 }
 
-/* Mostrar cuando se presiona el botón hamburguesa */
 .channel-sidebar.show {
-    display: block;
+  display: block;
 }
 
-/* Lista de canales */
 .channel-sidebar ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
 }
 
 .channel-sidebar li {
-    padding: 0.6rem 1rem;
-    border-radius: 12px;
-    cursor: pointer;
-    font-weight: 500;
-    font-size: 0.95rem;
-    transition: all 0.2s ease;
-    background-color: #f0f0f0;
-    color: #000;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-    /* suaviza el cuadro */
+  padding: 0.6rem 1rem;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  background-color: #f0f0f0;
+  color: #000;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
 .channel-sidebar li:hover {
-    background-color: #00d8ff;
-    color: #fff;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    /* resalta al pasar el mouse */
+  background-color: #00d8ff;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .channel-sidebar li.active {
-    background-color: #00bcd4;
-    color: #fff;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  background-color: #00bcd4;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 /* Scroll bonito */
 .channel-sidebar::-webkit-scrollbar {
-    width: 6px;
+  width: 6px;
 }
 
 .channel-sidebar::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.2);
-    border-radius: 3px;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
 }
 
-
 /* CSS PARA SALIR DEL MENU*/
-
 .sidebar-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 0.5rem;
 }
 
 .close-btn {
-  background: none;
-  border: none;
-  font-size: 1.4rem;
-  cursor: pointer;
-  color: #333;
+    background: none;
+    border: none;
+    font-size: 1.4rem;
+    cursor: pointer;
+    color: #333;
+    transition: transform 0.2s ease, color 0.2s ease;
+    padding: 5px;
+    border-radius: 6px;
 }
 
-/* Responsive móvil compacto */
+.close-btn:hover {
+    transform: scale(1.1);
+    color: #ff3b30;
+}
+
+/* ================================
+   RESPONSIVE MÓVIL
+================================ */
+/* ================================
+   RESPONSIVE MÓVIL
+================================ */
 @media (max-width: 480px) {
-    .channel-sidebar {
-        width: 220px;
-        /* ancho menor para móvil */
-        max-height: 300px;
-        /* altura menor para que no ocupe toda la pantalla */
-        padding: 0.6rem;
-    }
+  body {
+    justify-content: center;
+    align-items: center;
+  }
 
-    .channel-sidebar ul {
-        gap: 0.5rem;
-    }
+  /* Contenedor principal */
+  .chat-container {
+    width: 95%;
+    height: 95vh;      /* casi toda la pantalla */
+    border-radius: 14px; /* bordes redondeados */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+  }
 
-    .channel-sidebar li {
-        padding: 0.5rem 0.8rem;
-        font-size: 0.9rem;
-    }
+  /* Header */
+  .chat-header {
+    flex-shrink: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+  }
+
+  .chat-logo {
+    height: 50px;
+  }
+
+  .chat-header h2 {
+    font-size: 1rem;
+  }
+
+  .menu-btn {
+    font-size: 1.5rem;
+  }
+
+  /* Chat principal */
+  .chat-main {
+    flex: 1;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 1rem;
+  }
+
+  /* Input fijo en la parte inferior */
+  .chat-input {
+    flex-shrink: 0;
+    display: flex;
+    padding: 0.8rem;
+    border-top: 1px solid #ddd;
+    background: #fff;
+  }
+
+  .chat-input input {
+    flex: 1;
+    padding: 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  .send-btn {
+    width: 45px;
+    height: 45px;
+    font-size: 1.2rem;
+  }
+
+  /* Sidebar canales */
+  .channel-sidebar {
+    width: 220px;
+    max-height: 300px;
+    padding: 0.6rem;
+  }
+
+  .channel-sidebar ul {
+    gap: 0.5rem;
+  }
+
+  .channel-sidebar li {
+    padding: 0.5rem 0.8rem;
+    font-size: 0.9rem;
+  }
 }
