@@ -2,7 +2,7 @@
     {
         "id": 1,
         "name": "@Admin",
-        "password": "1234",
+        "password": "12",
         "email": "admin@chat.com",
         "rol": "admin",
         "img": "https://i.pravatar.cc/150?img=1"
@@ -10,7 +10,7 @@
     {
         "id": 2,
         "name": "@Usuario",
-        "password": "abcd",
+        "password": "ab",
         "email": "user@chat.com",
         "rol": "user",
         "img": "https://i.pravatar.cc/150?img=2"
@@ -38,7 +38,7 @@
         "password": "Cin1234",
         "email": "usuario2@chat.com",
         "rol": "user",
-        "img": "https://i.pravatar.cc/150?img=5"
+        "img": "css/img/Uni.jpg"
     },
     {
         "id": 6,
@@ -46,7 +46,7 @@
         "password": "123456789",
         "email": "usuario3@chat.com",
         "rol": "user",
-        "img": "https://i.pravatar.cc/150?img=6"
+        "img": "css/img/Alex.jpg"
     },
     {
         "id": 7,
@@ -54,7 +54,7 @@
         "password": "987654321",
         "email": "usuario4@chat.com",
         "rol": "user",
-        "img": "https://i.pravatar.cc/150?img=7"
+        "img": "css/img/Davi.jpg"
     },
     {
         "id": 8,
