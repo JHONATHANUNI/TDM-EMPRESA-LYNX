@@ -17,7 +17,7 @@ body {
   background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
 
   /* Patrón de logos */
-  background-image: url("logocss.png");
+  background-image: url("img/logocss.png");
   background-repeat: repeat;
   background-size: 180px;
   background-position: center;
@@ -30,7 +30,7 @@ body::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: url("logocss.png") no-repeat center;
+  background: url("img/logocss.png") no-repeat center;
   background-size: 400px;
   opacity: 0.08;
   pointer-events: none;
@@ -55,7 +55,7 @@ body::before {
 
 /* Logo arriba del formulario */
 .logo {
-  height: 8px;
+  height: 110px;
   width: auto;
   object-fit: contain;
   display: block;

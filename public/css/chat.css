@@ -10,7 +10,7 @@
 body {
   font-family: Arial, sans-serif;
   background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-  background-image: url("logocss.png");
+  background-image: url("img/logocss.png");
   background-repeat: repeat;
   background-size: 180px;
   background-position: center;
@@ -31,7 +31,7 @@ body::before {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: url("logocss.png") no-repeat center;
+  background: url("img/logocss.png") no-repeat center;
   background-size: 400px;
   opacity: 0.08;
   width: 100%;
@@ -143,7 +143,7 @@ body::before {
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   padding: 1rem;
-  background-image: url("LYNX_logo_PNG_file_vertical_orientation_024581-2.png");
+  background-image: url("img/LYNX_logo_PNG_file_vertical_orientation_024581-2.png");
   background-size: 250px;
   background-repeat: no-repeat;
   background-position: center;
