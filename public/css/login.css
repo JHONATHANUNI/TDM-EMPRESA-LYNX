@@ -114,22 +114,19 @@ body::before {
   font-size: 0.9rem;
 }
 
-/* === Responsive móvil === */
 @media (max-width: 480px) {
   body {
-    align-items: stretch; /* el cuadro se expande vertical */
+    /* Mantener centrado el cuadro */
+    align-items: center; /* horizontal y vertical */
+    justify-content: center;
   }
 
   .login-container {
-    width: 100%;
-    min-height: 100vh;   /* ocupa toda la pantalla */
-    border-radius: 0;
-    box-shadow: none;
-    padding: 20px;
-
-    display: flex;
-    justify-content: center; /* centra vertical */
-    align-items: center;     /* centra horizontal */
+    width: 90%;           /* ocupa casi todo el ancho */
+    max-width: 340px;     /* máximo tamaño */
+    border-radius: 12px;  /* bordes redondeados */
+    padding: 2rem;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
   }
 
   .login-form {
@@ -141,6 +138,6 @@ body::before {
   }
 
   .logo {
-    height: 70px; /* logo un poco más pequeño en móvil */
+    height: 100px; /* tamaño del logo en móvil */
   }
 }
