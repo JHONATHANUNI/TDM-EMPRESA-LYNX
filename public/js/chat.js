@@ -41,21 +41,21 @@ if (menuBtn && channelSidebar) {
     channelSidebar.classList.add("show");
   });
 
-// Cerrar sidebar con la X
+  // Cerrar sidebar con la X
   if (closeChannelSidebar) {
     closeChannelSidebar.addEventListener("click", () => {
       console.log("Click en X"); // 👈 debug
       channelSidebar.classList.remove("show");
     });
   }
-// Cerrar al dar click afuera del modal
+  // Cerrar al dar click afuera del modal
   document.addEventListener("click", (e) => {
-  if (channelSidebar.classList.contains("show") &&
+    if (channelSidebar.classList.contains("show") &&
       !channelSidebar.contains(e.target) &&
       e.target !== menuBtn) {
-    channelSidebar.classList.remove("show");
-  }
-});
+      channelSidebar.classList.remove("show");
+    }
+  });
 
 
   // Cambiar de canal
@@ -74,16 +74,29 @@ if (menuBtn && channelSidebar) {
 
       // Cambiar canal actual y reconectar
       currentGroup = newChannel;
-      if (window.socket) window.socket.close(); // cerrar conexión anterior
-      connect(user, currentGroup);
+
+      if (socket) {
+        socket.close(); // 👈 cerrar conexión anterior
+      }
+      connect(user, currentGroup); // 👈 abrir nueva limpia
+
+      // Pedir historial después de conectar
+      setTimeout(() => {
+        if (socket && socket.readyState === WebSocket.OPEN) {
+          socket.send(JSON.stringify({
+            type: "system",
+            text: `@${user.name} se unió al canal ${currentGroup}`,
+            group: currentGroup
+          }));
+          socket.send(JSON.stringify({ type: "history", group: currentGroup }));
+        }
+      }, 300);
 
       // Ocultar sidebar en móvil
       channelSidebar.classList.remove("show");
     });
   });
 }
-
-
 
 // ------------------- FIN NUEVO -------------------
 

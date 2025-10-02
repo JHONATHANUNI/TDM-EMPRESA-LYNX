@@ -6,7 +6,7 @@ let currentUserName = "";
 let msgCounter = 0; // contador de mensajes para evitar duplicados
 
 function safeParse(data) {
-  try { return JSON.parse(data); } 
+  try { return JSON.parse(data); }
   catch (err) { console.error("JSON parse error:", err, data); return null; }
 }
 
@@ -41,6 +41,17 @@ export function connect(user, group = "general") {
           data.user === currentUserName,
           msgId
         );
+        break;
+      case "history":
+        (data.messages || []).forEach(msg => {
+          const msgId = msg.id || `${msg.user}-${Date.now()}`;
+          addMessage(
+            { name: msg.user, img: msg.img || '', connected: true },
+            msg.text,
+            msg.user === currentUserName,
+            msgId
+          );
+        });
         break;
       case "system":
         addSystemMessage(data.text);

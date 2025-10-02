@@ -67,20 +67,25 @@ body::before {
 }
 
 /* === Header con logo y botón menú === */
+/* === Centrar logo de group en header === */
 .header {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 2rem;
+    display: flex;
+    justify-content: center; /* centra horizontalmente */
+    align-items: center;     /* centra verticalmente */
+    width: 100%;
+    margin-bottom: 1.5rem;  /* opcional: espacio debajo */
 }
 
-.logo {
-  height: 80px;
-  width: auto;
-  object-fit: contain;
-  display: block;
-  margin: 0 auto 1.5rem auto;
+.logo-status {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo-status .logo {
+    max-width: 150px;  /* ajusta el tamaño del logo */
+    height: auto;
+    display: block;
 }
 
 
